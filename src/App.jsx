@@ -25,6 +25,7 @@ const ProjectMobilistud = lazy(
 const ProjectInkgora = lazy(() => import("./components/ProjectInkgora.jsx"));
 const ChapterBreak = lazy(() => import("./components/ChapterBreak.jsx"));
 const Personal = lazy(() => import("./components/Personal.jsx"));
+const Trajectory = lazy(() => import("./components/Trajectory.jsx"));
 const Contact = lazy(() => import("./components/Contact.jsx"));
 
 gsap.registerPlugin(ScrollTrigger);
@@ -170,6 +171,7 @@ export default function App() {
           <ProjectInkgora />
           <ChapterBreak />
           <Personal />
+          <Trajectory />
           <Contact />
         </Suspense>
       </main>
