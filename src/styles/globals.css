@@ -101,6 +101,17 @@ body {
   }
 }
 
+/* Native scrollbar hidden only where the custom rail replaces it — touch
+   devices keep their own scroll UI untouched. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: var(--bg);
@@ -268,22 +279,115 @@ a {
 }
 
 /* ============================================================
-   LOADER
+   LOADER — letterpress plate registration
    ============================================================ */
 .loader {
   position: fixed;
   inset: 0;
   z-index: 10000;
   background: #111111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6vw;
+  overflow: hidden;
+  transition: transform 0.75s var(--ease-out-expo);
+  will-change: transform;
 }
+.loader.is-wiping {
+  transform: translateY(-101%);
+}
+.loader__inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.75s var(--ease-out-expo);
+}
+/* the content lags slightly behind the curtain — a touch of depth */
+.loader.is-wiping .loader__inner {
+  transform: translateY(34vh);
+}
+
+/* corner crop marks, drawn in on arrival */
+.loader__crop {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 0 solid rgba(250, 250, 250, 0.38);
+  animation: loader-crop-in 0.7s var(--ease-out-expo) both;
+}
+.loader__crop.tl {
+  top: 22px;
+  left: 22px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.loader__crop.tr {
+  top: 22px;
+  right: 22px;
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+.loader__crop.bl {
+  bottom: 22px;
+  left: 22px;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.loader__crop.br {
+  bottom: 22px;
+  right: 22px;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+}
+@keyframes loader-crop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* the stamped mark — two plates converging into register */
+.loader__mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  animation: loader-stamp 0.3s var(--ease-out-expo) both;
+}
+@keyframes loader-stamp {
+  from {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.loader__mark-plate {
+  position: absolute;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 800;
+  font-size: clamp(200px, 44vmin, 460px);
+  line-height: 0;
+  /* the “ glyph hangs from the baseline — recentre it optically */
+  translate: -50% 18%;
+}
+.loader__mark-plate--paper {
+  color: rgba(250, 250, 250, 0.85);
+}
+.loader__mark-plate--red {
+  color: var(--accent);
+}
+
+/* boot line, bottom left */
 .loader__line {
+  position: absolute;
+  left: 6vw;
+  bottom: calc(6vw + 26px);
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 0.04em;
   color: #fafafa;
   display: inline-flex;
@@ -305,27 +409,25 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
-.loader__bar {
+
+/* outlined counter, echoes the chapter-break numerals */
+.loader__count {
   position: absolute;
-  left: 6vw;
-  right: 6vw;
-  bottom: calc(6vw + 24px);
-  height: 1px;
-  background: rgba(250, 250, 250, 0.14);
-  overflow: hidden;
+  right: 5vw;
+  bottom: 4.4vw;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: clamp(64px, 11vw, 150px);
+  line-height: 0.8;
+  color: transparent;
+  /* no transition here — Chrome never completes a transition on
+     -webkit-text-stroke-color, leaving the start value pinned. The hard
+     snap suits the letterpress stamp anyway. */
+  -webkit-text-stroke: 1.5px rgba(250, 250, 250, 0.5);
+  font-variant-numeric: tabular-nums;
 }
-.loader__bar i {
-  position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform-origin: left center;
-}
-.loader__flash {
-  position: fixed;
-  inset: 0;
-  z-index: 10001;
-  background: #ffffff;
-  pointer-events: none;
+.loader__count.is-registered {
+  -webkit-text-stroke: 1.5px var(--accent);
 }
 
 /* ============================================================
@@ -1112,19 +1214,22 @@ a {
 }
 
 /* ============================================================
-   SITE CHROME — reading progress + persistent identity bar
+   SITE CHROME — perimeter reading progress + persistent identity bar
    ============================================================ */
-.progress-bar {
+.progress-frame {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 9960;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left center;
   pointer-events: none;
+}
+.progress-frame path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
 }
 .site-head {
   position: fixed;

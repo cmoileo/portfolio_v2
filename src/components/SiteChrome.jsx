@@ -7,28 +7,54 @@ gsap.registerPlugin(ScrollTrigger);
 const EMAIL = "leo.fezard33@gmail.com";
 
 /**
- * Persistent chrome that fades in once the hero has dissolved: a hairline
- * red reading-progress bar hugging the top edge, and a minimal identity
- * bar (name / say hi). The bar sits in mix-blend-mode: difference so the
- * same markup reads ink-on-paper and paper-on-ink as sections alternate.
+ * Persistent chrome revealed once the hero has dissolved.
+ *
+ * The reading progress is drawn as a red line that traces the viewport
+ * frame: it starts at the top-left corner, runs along the top edge, down
+ * the right side, back along the bottom and up the left — closing the
+ * rectangle exactly at 100% scroll. It replaces both the old top bar and
+ * the native scrollbar. A minimal identity bar (name / say hi) fades in
+ * alongside, in mix-blend-mode: difference so it reads on any section.
  */
 export default function SiteChrome() {
-  const barRef = useRef(null);
+  const svgRef = useRef(null);
+  const pathRef = useRef(null);
   const headRef = useRef(null);
+  const progress = useRef(0);
 
   useLayoutEffect(() => {
-    const bar = barRef.current;
+    const svg = svgRef.current;
+    const path = pathRef.current;
     const head = headRef.current;
     let shown = false;
+
+    const draw = () => {
+      const len = path.getTotalLength();
+      // clamp so a hair of the line is always visible once scrolling starts
+      path.style.strokeDasharray = `${len}`;
+      path.style.strokeDashoffset = `${len * (1 - progress.current)}`;
+    };
+
+    const layout = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const i = 1.25; // half the stroke width, keeps the line inside the edge
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      // clockwise from top-left: top → right → bottom → left, closed
+      path.setAttribute(
+        "d",
+        `M ${i} ${i} L ${w - i} ${i} L ${w - i} ${h - i} L ${i} ${h - i} Z`,
+      );
+      draw();
+    };
 
     const st = ScrollTrigger.create({
       start: 0,
       end: () => ScrollTrigger.maxScroll(window),
       onUpdate: (self) => {
-        if (bar) bar.style.transform = `scaleX(${self.progress})`;
+        progress.current = self.progress;
+        draw();
 
-        // Reveal once the hero hand-off is done (or right away on the
-        // static mobile hero, which is a single viewport tall).
         const hero = document.querySelector(".hero");
         const threshold = hero
           ? (hero.offsetHeight - window.innerHeight) * 0.82
@@ -39,16 +65,35 @@ export default function SiteChrome() {
           head.classList.toggle("is-visible", next);
         }
       },
+      onRefresh: layout,
     });
-    return () => st.kill();
+
+    layout();
+    window.addEventListener("resize", layout);
+    return () => {
+      st.kill();
+      window.removeEventListener("resize", layout);
+    };
   }, []);
 
   return (
     <>
-      <div ref={barRef} className="progress-bar" aria-hidden="true" />
+      <svg
+        ref={svgRef}
+        className="progress-frame"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path ref={pathRef} />
+      </svg>
+
       <header ref={headRef} className="site-head">
         <span className="site-head__name">Léo Fezard</span>
-        <a className="site-head__cta" href={`mailto:${EMAIL}`} data-cursor="hover">
+        <a
+          className="site-head__cta"
+          href={`mailto:${EMAIL}`}
+          data-cursor="hover"
+        >
           Say hi ↗
         </a>
       </header>
