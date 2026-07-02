@@ -9,7 +9,7 @@ const EMAIL = 'leo.fezard33@gmail.com'
 
 const LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leo-fezard/' },
-  { label: 'GitHub', href: 'https://github.com/' },
+  { label: 'GitHub', href: 'https://github.com/cmoileo' },
   { label: 'CV', href: '/cv.pdf' },
 ]
 

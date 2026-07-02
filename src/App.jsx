@@ -15,6 +15,7 @@ import Loader from "./components/Loader.jsx";
 import GrainOverlay from "./components/GrainOverlay.jsx";
 import CustomCursor from "./components/CustomCursor.jsx";
 import LiquidHero from "./components/LiquidHero.jsx";
+import SiteChrome from "./components/SiteChrome.jsx";
 
 // Below-the-fold sections are split into their own chunks.
 const Manifeste = lazy(() => import("./components/Manifeste.jsx"));
@@ -74,6 +75,7 @@ export default function App() {
       smoothWheel: true,
     });
     lenisRef.current = lenis;
+    if (import.meta.env.DEV) window.__lenis = lenis;
     lenis.stop(); // locked until the loader finishes
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -171,6 +173,8 @@ export default function App() {
           <Contact />
         </Suspense>
       </main>
+
+      {!loading && <SiteChrome />}
 
       {!isMobile && (
         <div ref={hintRef} className="scroll-indicator" aria-hidden="true">

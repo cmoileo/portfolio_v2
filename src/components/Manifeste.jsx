@@ -5,9 +5,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const LINES = [
-  { text: "“I don’t write code." },
-  { text: "I materialize a vision" },
-  { text: "of the world.”" },
+  {
+    parts: [
+      { text: "“I don’t " },
+      { text: "write code", strike: false },
+      { text: "." },
+    ],
+  },
+  { parts: [{ text: "I materialize a vision" }] },
+  { parts: [{ text: "of the world.”" }] },
 ];
 
 export default function Manifeste() {
@@ -49,7 +55,17 @@ export default function Manifeste() {
         >
           {LINES.map((l, i) => (
             <span key={i} className="manifeste__line reveal-mask">
-              <span className="reveal-line">{l.text}</span>
+              <span className="reveal-line">
+                {l.parts.map((p, j) =>
+                  p.strike ? (
+                    <span key={j} className="manifeste__strike">
+                      {p.text}
+                    </span>
+                  ) : (
+                    <span key={j}>{p.text}</span>
+                  ),
+                )}
+              </span>
             </span>
           ))}
         </div>

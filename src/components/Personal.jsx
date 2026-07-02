@@ -40,15 +40,31 @@ export default function Personal() {
             I over-think everything.
           </h2>
           <h2 className="personal__line accent blur-in personal__reveal">
-            I struggle to connect with people.
+            I can’t ship what I don’t love.
           </h2>
           <p
             className="personal__note blur-in personal__reveal"
             style={{ maxWidth: "54ch" }}
           >
-            Promise I’m trying to fix it — I’ve just opened an issue about it on
-            GitHub.
+            I’m told it’s a flaw. I’ve opened an issue about it — don’t expect a
+            fix anytime soon.
           </p>
+
+          <div className="issue-card blur-in personal__reveal" role="figure">
+            <div className="issue-card__head">
+              <span className="issue-card__repo">leo-fezard / self</span>
+              <span className="issue-card__state">● Open</span>
+            </div>
+            <p className="issue-card__title">
+              Fix: refuses to ship “good enough”
+            </p>
+            <div className="issue-card__meta">
+              <span>#001</span>
+              <span>opened 24 years ago</span>
+              <span>0 comments</span>
+              <span className="issue-card__label">wontfix</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
