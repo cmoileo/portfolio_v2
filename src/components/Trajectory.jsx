@@ -9,7 +9,7 @@ const STEPS = [
     year: "2019",
     kicker: "English studies",
     title: "Words, first.",
-    body: "Three years of English literature (LLCER). I loved the language — not what I could build with it. I wanted work I could touch, in a field I'd never be done learning.",
+    body: "Three years of English bachelor's degree (LLCER). I loved the language — not what I could build with it. I wanted work I could touch, in a field I'd never be done learning.",
   },
   {
     year: "2021",
