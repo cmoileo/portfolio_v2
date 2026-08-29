@@ -360,7 +360,7 @@ EN = {
     ],
     "languages": [
         "French - Native",
-        "English - B2 (upper intermediate)",
+        "English - C1 (TOEIC 945)",
         "Spanish - A2 (elementary)",
     ],
 }
@@ -472,7 +472,7 @@ FR = {
     ],
     "languages": [
         "Français - Langue maternelle",
-        "Anglais - B2 (intermédiaire supérieur)",
+        "Anglais - C1 (TOEIC 945)",
         "Espagnol - A2 (élémentaire)",
     ],
 }
