@@ -352,7 +352,7 @@ EN = {
         },
         {
             "title": "Bachelor's Degree, Web Development",
-            "meta": "École Supérieure du Digital, Paris, France | 2021 - 2024",
+            "meta": "École Supérieure du Digital, Bordeaux, France | 2021 - 2024",
             "bullets": [
                 "Capstone project: a fullstack project-management platform built with React and NestJS.",
             ],
@@ -464,7 +464,7 @@ FR = {
         },
         {
             "title": "Bachelor Développeur Web (Bac+3)",
-            "meta": "École Supérieure du Digital, Paris, France | 2021 - 2024",
+            "meta": "École Supérieure du Digital, Bordeaux, France | 2021 - 2024",
             "bullets": [
                 "Projet de fin d'études : plateforme de gestion de projet fullstack développée en React et NestJS.",
             ],
