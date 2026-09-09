@@ -279,8 +279,9 @@ EN = {
         "Fullstack software engineer with 3+ years of experience shipping B2B SaaS and cross-platform "
         "products. Backend in PHP / Laravel and Node.js (NestJS, AdonisJS), frontend in TypeScript with "
         "React, Next.js, Angular and Vue.js. Hands-on with multi-tenant architecture, REST API design, "
-        "automated testing, CI/CD and AI agent integration (MCP servers, LLM orchestration). Currently "
-        "completing a Master's degree in Fullstack Development and Management in Paris."
+        "automated testing, CI/CD and AI agent integration (MCP servers, LLM orchestration). Holds a "
+        "Master's degree in Fullstack Development and Management (Bordeaux), graduated with 18/20 on the "
+        "thesis and 20/20 on the defense. Now targeting opportunities in Paris."
     ),
     "skills": [
         ("Languages", "TypeScript, JavaScript, PHP, SQL, HTML, CSS, SCSS"),
@@ -294,7 +295,7 @@ EN = {
         ),
         (
             "AI and Agents",
-            "MCP servers, LLM orchestration, Ollama, Qwen 2.5, embeddings and vector search, Claude Code, OpenCode, edge AI",
+            "MCP servers, LLM orchestration, Ollama, embeddings and vector search, Claude Code, OpenCode, edge AI",
         ),
         (
             "DevOps and Tooling",
@@ -311,7 +312,7 @@ EN = {
                 "Develop Ooviiz, a B2B SaaS platform optimizing audiovisual production workflows, on a multi-tenant architecture.",
                 "Build and maintain a PHP / Laravel backend serving Angular and Vue.js + Ionic client applications.",
                 "Contribute to feature design and architecture decisions, automated tests and CI workflows.",
-                "Prototype agentic pipelines: Laravel orchestration driving a Qwen 2.5 model served locally through Ollama.",
+                "Prototype agentic pipelines with Laravel orchestration and a RAG (Retrieval-Augmented Generation) system for domain-specific content.",
             ],
         },
         {
@@ -345,9 +346,10 @@ EN = {
     "education": [
         {
             "title": "Master's Degree, Fullstack Development and Management",
-            "meta": "EFREI, Paris, France | 2024 - 2026",
+            "meta": "EFREI, Bordeaux, France | 2024 - 2026",
             "bullets": [
                 "Thesis: \"Rethinking SaaS in the age of agentic design\" - TypeScript MCP server proof of concept with Laravel orchestration.",
+                "Grades: 18/20 on the thesis, 20/20 on the defense.",
             ],
         },
         {
@@ -392,7 +394,8 @@ FR = {
         "de produits cross-platform. Backend en PHP / Laravel et Node.js (NestJS, AdonisJS), frontend en "
         "TypeScript avec React, Next.js, Angular et Vue.js. Expérimenté sur l'architecture multi-tenant, "
         "les API REST, les tests automatisés, la CI/CD et l'intégration d'agents IA (serveurs MCP, "
-        "orchestration de LLM). Actuellement en Mastère Manager Développeur Fullstack à Paris."
+        "orchestration de LLM). Diplômé d'un Mastère Manager Développeur Fullstack à Bordeaux, "
+        "avec 18/20 au mémoire et 20/20 à la soutenance. Recherche d'emploi ciblée sur Paris."
     ),
     "skills": [
         ("Langages", "TypeScript, JavaScript, PHP, SQL, HTML, CSS, SCSS"),
@@ -406,7 +409,7 @@ FR = {
         ),
         (
             "IA et agents",
-            "Serveurs MCP, orchestration de LLM, Ollama, Qwen 2.5, embeddings et recherche vectorielle, Claude Code, OpenCode, edge AI",
+            "Serveurs MCP, orchestration de LLM, Ollama, embeddings et recherche vectorielle, Claude Code, OpenCode, edge AI",
         ),
         (
             "DevOps et outils",
@@ -423,7 +426,7 @@ FR = {
                 "Développement d'Ooviiz, SaaS B2B d'optimisation des productions audiovisuelles, sur une architecture multi-tenant.",
                 "Conception et maintenance d'un backend PHP / Laravel alimentant des clients Angular et Vue.js + Ionic.",
                 "Participation aux décisions d'architecture, aux tests automatisés et aux workflows CI.",
-                "Prototypage de pipelines agentic : orchestration Laravel pilotant un modèle Qwen 2.5 servi localement via Ollama.",
+                "Prototypage de pipelines agentic : orchestration Laravel couplée à la mise en place d'un système RAG (Retrieval-Augmented Generation).",
             ],
         },
         {
@@ -457,9 +460,10 @@ FR = {
     "education": [
         {
             "title": "Mastère Manager Développeur Fullstack (Bac+5)",
-            "meta": "EFREI, Paris, France | 2024 - 2026",
+            "meta": "EFREI, Bordeaux, France | 2024 - 2026",
             "bullets": [
                 "Mémoire : « Penser les SaaS à l'ère de l'agentic design » - POC de serveur MCP en TypeScript avec orchestration Laravel.",
+                "Notes : 18/20 au mémoire, 20/20 à la soutenance.",
             ],
         },
         {
@@ -482,8 +486,8 @@ def main():
     register_fonts()
     build_styles()
     build(EN, os.path.join(OUT_DIR, "cv.pdf"))
-    build(FR, os.path.join(OUT_DIR, "cv-fr.pdf"))
-    print("Generated public/cv.pdf and public/cv-fr.pdf")
+    build(FR, os.path.join(OUT_DIR, "cv_fr.pdf"))
+    print("Generated public/cv.pdf and public/cv_fr.pdf")
 
 
 if __name__ == "__main__":
